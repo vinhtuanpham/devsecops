@@ -26,6 +26,11 @@ steps:
     command: 'custom'
     workingDir: 'src'
     customCommand: 'audit'
+
+- task: WhiteSource@20
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/src'
+    projectName: 'devsecops'
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonarcloud'
