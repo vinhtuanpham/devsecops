@@ -29,7 +29,7 @@ steps:
 
 - task: WhiteSource@20
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/src'
+    cwd: '$(System.DefaultWorkingDirectory)'
     projectName: 'devsecops'
 - task: SonarCloudPrepare@1
   inputs:
