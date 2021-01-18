@@ -26,3 +26,18 @@ steps:
     command: 'custom'
     workingDir: 'src'
     customCommand: 'audit'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'vinhtuanpham'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'vinhtuanpham'
+    cliProjectName: 'devsecops'
+    cliSources: 'src'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
