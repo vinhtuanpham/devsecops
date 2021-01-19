@@ -51,3 +51,11 @@ steps:
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker'
+    repository: 'vinhpt90/devsecops'
+    command: 'buildAndPush'
+    Dockerfile: 'src/Dockerfile'
+    tags: '$(Build.SourceBranchName).$(Build.BuildId)'
+
