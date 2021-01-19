@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "applicationinsights": "^1.8.8",
     "express": "^4.17.1"
   },
   "devDependencies": {
