@@ -1,30 +1,8 @@
-var expect  = require('chai').expect;
-var request = require('request');
-
-describe('Status and content', function() {
-    describe ('Main page', function() {
-        it('status', function(done){
-            request('http://localhost:8080/', function(error, response, body) {
-                expect(response.statusCode).to.equal(200);
-                done();
-            });
-        });
-
-        it('content', function(done) {
-            request('http://localhost:8080/' , function(error, response, body) {
-                expect(body).to.equal('Hello World');
-                done();
-            });
-        });
+var assert = require('assert');
+describe('Array', function() {
+  describe('#indexOf()', function() {
+    it('should return -1 when the value is not present', function() {
+      assert.equal([1, 2, 3].indexOf(4), -1);
     });
-
-    describe ('About page', function() {
-        it('status', function(done){
-            request('http://localhost:8080/about', function(error, response, body) {
-                expect(response.statusCode).to.equal(404);
-                done();
-            });
-        });
-
-    });
+  });
 });

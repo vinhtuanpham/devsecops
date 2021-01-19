@@ -24,6 +24,12 @@ stages:
       inputs:
         command: 'install'
         workingDir: 'src'
+    - task: Npm@1
+      displayName: npm test
+      inputs:
+        command: 'custom'
+        workingDir: 'src'
+        customCommand: 'test'
 - stage: Vulnerability
   displayName: Scan vulnerability application
   jobs:
