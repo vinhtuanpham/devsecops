@@ -27,7 +27,7 @@ stages:
 - stage: Vulnerability
   displayName: Scan vulnerability application
   jobs:
-  - job: Vulnerability
+  - job: Npm_Vulnerability
     displayName: Npm Vulnerability
     steps:
     - task: Npm@1
@@ -36,7 +36,7 @@ stages:
         command: 'custom'
         workingDir: 'src'
         customCommand: 'audit'
-  - job: Vulnerability
+  - job: WhiteSource_Vulnerability
     displayName: WhiteSource Vulnerability
     steps:
     - task: WhiteSource@20
