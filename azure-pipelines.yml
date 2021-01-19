@@ -10,7 +10,7 @@ trigger:
 - release/*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-20.04'
 
 stages:
 - stage: Build
@@ -109,13 +109,13 @@ stages:
         imageName: 'index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId)'
         doVulnScan: true
 
-    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image vuln wmdxc.azurecr.io/wm-microservice-framework/build/ms-virtual-agent-core:$(Build.SourceBranchName).$(Build.BuildId) os
+    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image vuln index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) os
       displayName: vulnerability report
     
-    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' evaluate check wmdxc.azurecr.io/wm-microservice-framework/build/ms-virtual-agent-core:$(Build.SourceBranchName).$(Build.BuildId) --detail
+    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' evaluate check index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) --detail
       displayName: policy evaluation report
     
-    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image content wmdxc.azurecr.io/wm-microservice-framework/build/ms-virtual-agent-core:$(Build.SourceBranchName).$(Build.BuildId) os
+    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image content index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) os
       displayName: system packages report
 
 
