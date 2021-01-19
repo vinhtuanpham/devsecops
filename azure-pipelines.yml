@@ -12,50 +12,56 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
+stages:
+- stage: Build
+  displayName: Build application container
+  jobs:
+  - job: Build
+    displayName: Docker Build
+    steps:
+    - task: Npm@1
+      displayName: npm install
+      inputs:
+        command: 'install'
+        workingDir: 'src'
 
-- task: Npm@1
-  displayName: npm install
-  inputs:
-    command: 'install'
-    workingDir: 'src'
+    - task: Npm@1
+      displayName: npm audit
+      inputs:
+        command: 'custom'
+        workingDir: 'src'
+        customCommand: 'audit'
 
-- task: Npm@1
-  displayName: npm audit
-  inputs:
-    command: 'custom'
-    workingDir: 'src'
-    customCommand: 'audit'
+    - task: WhiteSource@20
+      inputs:
+        cwd: '$(System.DefaultWorkingDirectory)'
+        projectName: 'devsecops'
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'sonarcloud'
+        organization: 'vinhtuanpham'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'vinhtuanpham'
+        cliProjectName: 'devsecops'
+        cliSources: 'src'
+        extraProperties: |
+          # Additional properties that will be passed to the scanner, 
+          # Put one key=value per line, example:
+          # sonar.exclusions=**/*.bin
+          sonar.coverage.exclusions = "**/test/","**/server.js"
 
-- task: WhiteSource@20
-  inputs:
-    cwd: '$(System.DefaultWorkingDirectory)'
-    projectName: 'devsecops'
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'vinhtuanpham'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'vinhtuanpham'
-    cliProjectName: 'devsecops'
-    cliSources: 'src'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner, 
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      sonar.coverage.exclusions = "**/test/","**/server.js"
+    - task: SonarCloudAnalyze@1
 
-- task: SonarCloudAnalyze@1
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker'
+        repository: 'vinhpt90/devsecops'
+        command: 'buildAndPush'
+        Dockerfile: 'src/Dockerfile'
+        tags: '$(Build.SourceBranchName).$(Build.BuildId)'
 
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
-- task: Docker@2
-  inputs:
-    containerRegistry: 'Docker'
-    repository: 'vinhpt90/devsecops'
-    command: 'buildAndPush'
-    Dockerfile: 'src/Dockerfile'
-    tags: '$(Build.SourceBranchName).$(Build.BuildId)'
 
