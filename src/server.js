@@ -1,7 +1,7 @@
 
 const express = require('express')
 const app = express()
-const port = 8080
+const port = 80
 let appInsights = require("applicationinsights");
 appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY || "").start();
 
