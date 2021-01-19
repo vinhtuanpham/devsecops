@@ -87,7 +87,12 @@ stages:
   - job: Build
     displayName: Build Docker
     steps:
-
+    - script: sudo pip install anchorecli
+      displayName: Install Anchore CLI 
+    - script: export PATH="$HOME/.local/bin/:$PATH"
+      displayName: Set Path
+    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image list
+      displayName: test anchore
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker'
