@@ -24,7 +24,7 @@ stages:
       inputs:
         command: 'install'
         workingDir: 'src'
-- stage: Scan Vulnerability
+- stage: Vulnerability
   displayName: Scan vulnerability application
   jobs:
   - job: Vulnerability
@@ -44,7 +44,7 @@ stages:
         cwd: '$(System.DefaultWorkingDirectory)'
         projectName: 'devsecops'
 
-- stage: Code Quality
+- stage: Code_Quality
   displayName: Scan Code Quality
   jobs:
   - job: Sonar
