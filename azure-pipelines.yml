@@ -109,7 +109,7 @@ stages:
     #     imageName: 'index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId)'
     #     doVulnScan: true
 
-    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image vuln index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).64 os
+    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image vuln index.docker.io/vinhpt90/devsecops:master.69 os
       displayName: vulnerability report
     
     # - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' evaluate check index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) --detail
