@@ -112,10 +112,10 @@ stages:
     - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image vuln index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) os
       displayName: vulnerability report
     
-    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' evaluate check index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) --detail
-      displayName: policy evaluation report
+    # - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' evaluate check index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) --detail
+    #   displayName: policy evaluation report
     
-    - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image content index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) os
-      displayName: system packages report
+    # - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image content index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) os
+    #   displayName: system packages report
 
 
