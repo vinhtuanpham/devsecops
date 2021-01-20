@@ -101,13 +101,13 @@ stages:
         Dockerfile: 'src/Dockerfile'
         tags: '$(Build.SourceBranchName).$(Build.BuildId)'
     
-    - task: AnchoreTask@1
-      inputs:
-        engineUrl: 'http://52.165.239.212:8228/v1'
-        engineUser: 'admin'
-        enginePassword: 'foobar'
-        imageName: 'index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId)'
-        doVulnScan: true
+    # - task: AnchoreTask@1
+    #   inputs:
+    #     engineUrl: 'http://52.165.239.212:8228/v1'
+    #     engineUser: 'admin'
+    #     enginePassword: 'foobar'
+    #     imageName: 'index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId)'
+    #     doVulnScan: true
 
     - script: anchore-cli --url='http://52.165.239.212:8228/v1' --u='admin' --p='foobar' image vuln index.docker.io/vinhpt90/devsecops:$(Build.SourceBranchName).$(Build.BuildId) os
       displayName: vulnerability report
