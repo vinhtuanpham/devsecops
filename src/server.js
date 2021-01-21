@@ -37,3 +37,8 @@ var server = app.listen(8080, function () {
    
    console.log("Example app listening at http://%s:%s", host, port)
 })
+
+var connection.query("SELECT * FROM bank_accounts WHERE dob = ? AND bank_account = ?",[
+     req.body.dob,
+     req.body.account_number
+    ],function(error, results){});
